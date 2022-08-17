@@ -23,7 +23,7 @@ formEl.addEventListener("submit", (e) => {
 });
 
 function checkTheInput(value) {
-  console.log("type of input---", typeof value);
+  
   //   if Value is not a number, display the error message and stop the function with 'return'
   if (isNaN(value)) {
     outputEl.innerHTML = `The weight you entered is not a number`;
