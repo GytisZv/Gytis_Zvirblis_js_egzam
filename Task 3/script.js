@@ -10,5 +10,39 @@ Paspaudus mygtuką "Show users":
 Pastaba: Sukurta kortelė, kurioje yra pateikiama vartotojo informacija, turi 
 turėti bent minimalų stilių ir būti responsive;
 -------------------------------------------------------------------------- */
+// konstantos
+const ENDPOINT = "https://api.github.com/users";
+const btnEl = document.getElementById("btn");
+const outputDiv = document.getElementById("output");
+const messageEl = document.getElementById("message");
+// listeneris
+btnEl.addEventListener("click", getAndDisplay);
+// funkcijos
 
-const ENDPOINT = 'https://api.github.com/users';
+async function getAndDisplay() {
+  // parsiunciam info json formatu
+  const recieved = await getUsers();
+  //   nusiunciam atvaizdavimui
+  displayInHtml(recieved);
+}
+
+async function getUsers() {
+  // is pateikto endpointo pasiemam info
+  const resp = await fetch(ENDPOINT);
+  //   konvertuojam info i json
+  const dataInJSON = await resp.json();
+  return dataInJSON;
+}
+
+function displayInHtml(user) {
+  // paslepiam initial message
+  messageEl.style.display = "none";
+  //   kiekvienam useriui sukuriam po box ir i ja dedame prasoma info (login and avatar)
+  user.forEach((el) => {
+    const userBox = document.createElement("div");
+    // uzdedam className stilizavimui
+    userBox.className = "user-box";
+    userBox.innerHTML = `<p>${el.login}</p> <img src="${el.avatar_url}">`;
+    outputDiv.append(userBox);
+  });
+}
