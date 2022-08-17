@@ -18,17 +18,20 @@ const formEl = document.forms[0];
 // event listeners
 formEl.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("mygtukas veikia, ir formoje gaunam: ", formEl.search.value);
   //   send the input value to check if its a number
   checkTheInput(+formEl.search.value);
 });
 
 function checkTheInput(value) {
   console.log("type of input---", typeof value);
-  if (typeof value === "number") {
-    console.log("number is valid");
-    showTheOutput(value);
+  //   if Value is not a number, display the error message and stop the function with 'return'
+  if (isNaN(value)) {
+    outputEl.innerHTML = `The weight you entered is not a number`;
+    return;
   }
+  showTheOutput(value);
+  //   after sending input trough, we clear the input field
+  formEl.search.value = "";
 }
 function showTheOutput(value) {
   const kgToLb = value * 2.2046;
