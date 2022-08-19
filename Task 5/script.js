@@ -21,10 +21,10 @@ const users = [
 ];
 
 function filterDogOwners(data) {
-  return users.filter((user) => user.hasDog === true);
+  return data.filter((user) => user.hasDog === true);
 }
 function filterAdults(data) {
-  return users.filter((user) => user.age >= 18);
+  return data.filter((user) => user.age >= 18);
 }
 console.log("Sunis turi sie vartotojai: ", filterDogOwners(users));
 console.log("Pilnameciai yra sie vartotojai: ", filterAdults(users));
